@@ -1,0 +1,104 @@
+🧾 GIT CHEAT SHEET – Most Used Commands
+🔧 Initial Setup
+Command	Description
+git config --global user.name "Your Name"	Set your name
+git config --global user.email "you@example.com"	Set your email
+git config --list	Show current Git config
+
+📁 Create or Clone Repositories
+Command	Description
+git init	Create a new Git repository in current folder
+git clone <url>	Clone an existing repository from GitHub or remote
+git clone <url> <directory>         # Clone to specific directory
+
+💾 Staging & Committing
+Command	Description
+git status	See changes and status of working directory
+git add <file>	Stage specific file
+git add .	Stage all changes in directory
+git commit -m "message"	Commit staged changes with a message
+git commit -am "message"	Stage and commit tracked files in one step
+
+📜 Viewing History
+Command	Description
+git log                             # View commit history
+git log --oneline                   # Compact commit history
+git log --graph                     # Visual branch history
+git show <commit-hash>              # Show specific commit details
+git diff                            # Show unstaged changes
+git diff --staged                   # Show staged changes
+git diff <commit1> <commit2>        # Compare commits
+
+🔄 Branching & Merging
+Command	Description
+git branch	List all local branches
+git branch -a                       # List all branches (local + remote)
+git branch <branch-name>  	Create a new branch
+git checkout <branch-name>  	Switch to another branch
+git checkout -b <branch-name>  	Create and switch to new branch
+git merge <branch-name>  	Merge a branch into current branch
+git branch -d <branch-name>         # Delete branch (safe)
+git branch -D <branch-name>         # Force delete branch
+
+🔁 Pushing & Pulling
+Command	Description
+git remote -v	View remotes like origin
+git push	Push changes to remote repository
+git push -u origin <branch>	Push and set upstream for new branch
+git pull	Pull changes from remote (fetch + merge)
+git fetch	Download changes without merging
+
+🔙 Undoing & Resetting
+Command	Description
+git checkout -- <file>	Discard local changes in a file
+git restore <file>	(Modern) Undo changes in file
+git reset HEAD <file>	Unstage a file
+git revert <commit>	Create a new commit that reverses the changes
+git reset --hard <commit>	Reset to a previous commit (⚠️ destructive)
+git clean -fd                       # Remove untracked files and directories
+
+🌍 Remote Repository
+Command	Description
+git remote -v	View remotes like origin
+git remote add origin <url>	Link local repo to remote
+git remote remove origin	Remove remote
+git push -u origin <branch>         # Push and set upstream
+git push origin main	Push local main branch to remote origin
+git pull origin <branch>            # Pull from specific branch
+git pull origin main	Pull updates from remote main branch
+git remote set-url origin <url> change remote url in one go
+
+🧹 Clean Up
+Command	Description
+git clean -n	Preview untracked files to be deleted
+git clean -f	Delete untracked files
+
+📦 Stashing (Save temporary work)
+Command	Description
+git stash                           # Stash current changes
+git stash push -m "message"         # Stash with message
+git stash list                      # List all stashes
+git stash pop                       # Apply and remove latest stash
+git stash apply                     # Apply stash without removing it
+git stash drop                      # Delete latest stash
+git stash clear                     # Delete all stashes
+
+Advanced Commands
+bashgit rebase <branch>                 # Rebase current branch onto another
+git rebase -i HEAD~3                # Interactive rebase last 3 commits
+git cherry-pick <commit-hash>       # Apply specific commit to current branch
+git tag <tag-name>                  # Create lightweight tag
+git tag -a <tag-name> -m "message"  # Create annotated tag
+git push --tags  
+
+Checking & Fixing
+bashgit fsck                            # Check repository integrity
+git gc                              # Garbage collection (cleanup)
+git reflog                          # Show reference logs
+git blame <file>                    # Show who changed each line
+git grep <pattern>                  # Search for pattern in files
+
+File Operations
+bashgit rm <file>                       # Remove file from repository
+git rm --cached <file>              # Remove from repository but keep locally
+git mv <old-name> <new-name>        # Rename/move file

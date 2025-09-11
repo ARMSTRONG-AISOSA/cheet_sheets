@@ -1,0 +1,96 @@
+1. Create project with Vite
+# npm
+npm create vite@latest .
+
+2. Choose framework and variant
+When prompted:
+Select React
+Select TypeScript
+
+3. Install dependencies
+npm install
+
+4. Start development server
+npm run dev
+
+
+=======================================
+
+1. React Router DOM (for navigation between pages)
+npm install react-router-dom
+npm install -D @types/react-router-dom   # for TypeScript
+
+
+//Usage example (App.tsx):
+
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Home from "./pages/Home";
+import About from "./pages/About";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <nav>
+        <Link to="/">Home</Link> | <Link to="/about">About</Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+
+
+
+=======================================
+Installation Using Vite
+
+Install Tailwind CSS
+npm install tailwindcss @tailwindcss/vite
+
+-------------------------------------------------
+Configure the Vite plugin
+Add the @tailwindcss/vite plugin to your Vite configuration.
+
+vite.config.ts (file)
+import { defineConfig } from 'vite'
+import tailwindcss from '@tailwindcss/vite'
+export default defineConfig({
+  plugins: [
+    tailwindcss(),
+  ],
+})
+
+-------------------------------------------------
+Import Tailwind CSS
+Add an @import to your CSS file that imports Tailwind CSS.
+
+@import "tailwindcss";
+
+
+-------------------------------------------------
+Start your build process
+
+Terminal
+npm run dev
+
+
+-------------------------------------------------
+Start using Tailwind in your HTML
+Make sure your compiled CSS is included in the <head> (your framework might handle this for you), then start using Tailwind’s utility classes to style your content.
+
+HTML
+
+<!doctype html>
+<html>
+  <link href="/src/style.css" rel="stylesheet">
+</head>
+<body>
+  <h1 class="text-3xl font-bold underline">
+    Hello world!
+  </h1>
+</body>
+</html>
