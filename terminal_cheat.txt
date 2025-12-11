@@ -1,6 +1,7 @@
 
 ✅ Most Common Bash / Terminal Commands
 
+🔹 Navigation
 | Command              | Description                                    |
 | -------------------- | ---------------------------------------------- |
 | `pwd`                | Show current directory path                    |
