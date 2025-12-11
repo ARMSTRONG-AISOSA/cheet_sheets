@@ -1,0 +1,54 @@
+
+✅ Most Common Bash / Terminal Commands
+
+| Command              | Description                                    |
+| -------------------- | ---------------------------------------------- |
+| `pwd`                | Show current directory path                    |
+| `ls`                 | List files and folders                         |
+| `ls -a`              | List **all** files (including hidden `.files`) |
+| `ls -l`              | Long list (permissions, size, date)            |
+| `cd folderName/`     | Move into a folder                             |
+| `cd ..`              | Go up one directory                            |
+| `cd ~`               | Go to home directory                           |
+| `cd /path/to/folder` | Go to specific location                        |
+
+
+🔹 File & Folder Management
+| Command                     | Description                     |
+| -----------------------     | ------------------------------- |
+| `mkdir project`             | Create a new directory          |
+| `touch file.js`             | Create a new file               |
+| `rm file.js`                | Delete a file                   |
+| `rm -r folder`              | Remove a folder **recursively** |
+| `cp file1 file2`            | Copy a file                     |
+| `cp -r folder1 folder2`     | Copy folder & contents          |
+| `mv oldName newName`        | Move/rename file or folder      |
+| `mv folder1/* folder2/`     | move all files into folder2     |
+| `mv * **/folder2/`          | already inside folder1          |
+
+
+
+
+🔹 System & Utility
+| Command                    | Description                          |
+| -----------------------    | -------------------------------      |
+| `mkdir project`            | Create a new directory               |
+| `touch file.js`            | Create a new file                    |
+| `rm file.js`               | Delete a file                        |
+| `rm -r folder`             | Remove a folder **recursively**      |
+| `cp file1 file2`           | Copy a file content to another       |
+| `cat file1.txt >> file1.tx`| Append content to 2nd file           |
+| `cp -r folder1 folder2`    | Copy folder & contents               |
+| `mv oldName newName`       | Move/rename file or folder           |
+| `xdg-open filename.txt`    | Open file                            |
+| `xdg-open ./foldername`    | Open current folder/folder           |
+
+
+
+
+🧩 VS Code Terminal Tricks / Commands
+| Command        | Description                        |
+| -------------- | ---------------------------------- |
+| `code .`       | Open the current folder in VS Code |
+| `code file.js` | Open a specific file               |
+
