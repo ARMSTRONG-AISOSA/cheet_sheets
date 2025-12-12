@@ -53,3 +53,19 @@
 | `code .`       | Open the current folder in VS Code |
 | `code file.js` | Open a specific file               |
 
+
+ 💻 Common Git Commands (used a lot in VS Code)
+| Command                     | Description                   |
+| --------------------------- | ----------------------------- |
+| `git init`                  | Initialize a git repo         |
+| `git clone <url>`           | Download repo to your system  |
+| `git status`                | Check what changed            |
+| `git add .`                 | Stage all changes             |
+| `git commit -m "message"`   | Save changes with a message   |
+| `git push`                  | Upload changes to repo        |
+| `git pull`                  | Download latest changes       |
+| `git branch`                | List branches                 |
+| `git checkout -b newBranch` | Create & switch to new branch |
+| `git checkout branchName`   | Switch to a branch            |
+
+
