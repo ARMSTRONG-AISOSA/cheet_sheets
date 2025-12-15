@@ -18,6 +18,7 @@
 | Command                     | Description                     |
 | -----------------------     | ------------------------------- |
 | `mkdir project`             | Create a new directory          |
+| `xdg-open ~/folderpath/`    | Open folder in GUI              |
 | `touch file.js`             | Create a new file               |
 | `rm file.js`                | Delete a file                   |
 | `rm -r folder`              | Remove a folder **recursively** |
@@ -31,18 +32,21 @@
 
 
 🔹 System & Utility
-| Command                    | Description                          |
-| -----------------------    | -------------------------------      |
-| `mkdir project`            | Create a new directory               |
-| `touch file.js`            | Create a new file                    |
-| `rm file.js`               | Delete a file                        |
-| `rm -r folder`             | Remove a folder **recursively**      |
-| `cp file1 file2`           | Copy a file content to another       |
-| `cat file1.txt >> file1.tx`| Append content to 2nd file           |
-| `cp -r folder1 folder2`    | Copy folder & contents               |
-| `mv oldName newName`       | Move/rename file or folder           |
-| `xdg-open filename.txt`    | Open file                            |
-| `xdg-open ./foldername`    | Open current folder/folder           |
+| Command                         | Description                          |
+| --------------------------------| ------------------------------------ |
+| `mkdir project`                 | Create a new directory               |
+| `touch file.js`                 | Create a new file                    |
+| `rm file.js`                    | Delete a file                        |
+| `rm -r folder`                  | Remove a folder **recursively**      |
+| `cp file1 file2`                | Copy a file content to another       |
+| `cat file1.txt >> file1.tx`     | Append content to 2nd file           |
+| `cp -r folder1 folder2`         | Copy folder & contents               |
+| `mv oldName newName`            | Move/rename file or folder           |
+| `xdg-open filename.txt`         | Open file                            |
+| `xdg-open ./foldername`         | Open current folder/folder           |
+| `ls /usr/share/applications`    | Check application names              |
+| `gtk-launch app-name.desktop`   | Launch an application                |
+
 
 
 
