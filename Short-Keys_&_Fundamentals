@@ -1,0 +1,264 @@
+
+
+
+
+Shift + (Fn) + PrntScrn ==> Sectional Screen Shot
+
+
+//========== Desktop =============//
+(Fn) + PrntScrn ==> Screen Shot 
+F9 ==> Open/Close Side Bar
+F3 ==> Toggle Extra Pane
+Ctrl + Alt + Shift + R ==> Screen Rec
+Crtl + S ==> Save Doc
+ctrl + H ==> Show Hidden Files
+Ctrl + R ==> Refresh View
+Ctrl + L ==> Toggle Locaton Entry
+Ctrl + T ==> Open NewTab 
+Alt + F4 ==> Close application
+Ctrl + W ==> Close Application Tab (Specific)
+Ctrl + Q ==> Close Application (All)
+Ctrl + F ==> Search
+Ctrl + D ==> Bookmark
+Alt + Tab ==> Change Tab
+Ctrl + Alt + Direction Key(up/right) ==> Switch Workspace
+Super + H ==> Hide Current Window (My Key Bind)
+Super + M ==> Maximize Current Window (My Key Bind)
+Alt + F5 ==> Unmaximize Current Window (My Key Bind)
+Super + D ==> Hides all windows to reveal the desktop
+Alt + Tab ==> Cycle Through Open Window
+Super + Ditection Key ==> Make App Stick to scren section
+F11 ==> Full Screen
+F9 ==> Show/Hide Action menu
+Ctrl + N ==> Open New Window
+Ctrl + Shift + N ==> New Folder
+Ctrl + I ==> Show Properties
+Shift + Del ==> Delete Permanently
+Shift + Ctrl + N ==> New FRolder
+ctrl + Alt + L ==> Lock Screen
+ctrl + Super + S ==> Suspend PC {ram + drive}
+Ctrl + 1/2/3 ==> Switch Folder Views
+Alt + Left Click ==> Drag Application Window
+Super + D ==> Minimise All windows
+
+//========== Terminal =============//
+Ctrl + Alt + T ==> Open Terminal
+Shift + Ctrl + N ==> New Window
+Shift + Ctrl + Q ==> Close Window
+Shift + Ctrl + F ==> Search
+Shift + Ctrl + V ==> Paste
+Shift + Ctrl + C ==> Copy
+Shift + Ctrl + A ==> Select All
+Ctrl + (+) ==> Zoom In
+Ctrl + (-) ==> Zoom Out
+Ctrl + 0 ==> Normal Size
+
+Move to a folder from root directory ==> cd ~/Documents/Visual_Studio/testCopy/move2
+Launch an app via the terminal
+        Check application names: ls /usr/share/applications 
+        Launch an application:  gtk-launch brave-browser.desktop
+gtk ==> → GIMP Toolkit ---- launch → start / open an application
+
+
+//========== Application Terminal =============//
+-------------------------------------------------------------------
+Launch an app via the terminal
+        Check application names: ls /usr/share/applications 
+        Search an application name: ls /usr/share/applications | grep vlc 
+        Launch an application:  gtk-launch brave-browser.desktop
+gtk ==> → GIMP Toolkit ---- launch → start / open an application
+
+-------------------------------------------------------------------
+Play a movie with vlc:
+        vlc filepath/filename.mp4
+
+
+-------------------------------------------------------------------
+Open Folder:
+        xdg-open ~/folderpath/
+
+
+-------------------------------------------------------------------
+Delete File(s):
+        rm filename.txt              # Delete a single file
+        rm file1.txt file2.jpg       # Delete multiple files
+        rm *.tmp                     # Delete all .tmp files
+        rm *.log *.tmp *.bak         # Delete multiple file types
+
+
+Safer Options:
+        rm -i file.txt               # Ask for confirmation before each file
+
+
+Delete Folder(s):
+        rmdir folder_name            # Only works if folder is EMPTY
+
+
+Directory with Contents:
+        rm -r folder_name            # Recursive delete (files + subfolders)
+        rm -rf folder_name           # Force recursive delete (no prompts)
+⚠️ DANGEROUS: rm -rf / or rm -rf * can destroy your system!
+
+
+Delete specific file types:
+        rm *.log                     # All .log files
+        rm -i *.txt                  # All .txt files (with confirmation)
+        rm project/*.tmp             # All .tmp files in project/ folder
+
+
+Delete hidden files (starting with .):
+        rm .*.swp                    # Vim swap files
+        rm -rf .cache/               # Delete cache folder
+
+
+Create alias for safe rm:
+        alias rm='rm -i'              # Always ask for confirmation
+        source ~/.bashrc              # Restart user terminal
+
+
+Safer Alternatives
+Send to Trash (GUI-like):
+        # Install trash-cli first
+        sudo apt install trash-cli    # Debian/Ubuntu
+        sudo yum install trash-cli    # RHEL/Fedora
+
+        trash-put file.txt           # Move to trash
+        trash-list                   # List trashed items
+        trash-restore               # Restore from trash
+        trash-empty                 # Empty trash
+
+
+-------------------------------------------------------------------
+Search(grep):
+        grep "word" filename
+        ex. grep "error" log.txt
+
+   grep is a Linux command used to search for text patterns inside files or command output.
+   Think of it as: “Find lines that contain this word.”
+
+grep with another command (very common):
+        command | grep "word"
+        ex. ps aux | grep firefox
+        ex. ls /usr/share/applications | grep wireshark
+
+Search inside a file:
+        armstrong@armstrong-Latitude-E6540:~/Documents/Visual_Studio$ grep "git" "cheet_sheets/terminal_cheat.txt" 
+
+Search inside a folder:
+        armstrong@armstrong-Latitude-E6540:~/Documents/Visual_Studio$ grep -r "git" "cheet_sheets" 
+        armstrong@armstrong-Latitude-E6540:~/Documents/Visual_Studio$ grep -r "git" . 
+
+
+
+    You can “pipe” output into grep using
+
+| Option         | Meaning                                 |
+| -------------- | --------------------------------------- |
+| `-i`           | Ignore case (`Error`, `error`, `ERROR`) |
+| `-r`           | Search recursively (folders)            |
+| `-n`           | Show line numbers                       |
+| `-v`           | Show lines **not** matching             |
+| `--color=auto` | Highlight matches                       |
+
+        ex. ps aux | grep --color=auto brave
+
+
+
+-------------------------------------------------------------------
+Bluetooth:
+        bluetoothctl → start program
+        power off
+        power on
+        agent on
+        default-agent
+        scan on → find devices
+        scan off → stop scanning
+        pair <MAC> → pair to a device
+        trust <MAC> → trust a paired device
+        connect <MAC> → connect to a paired and trusted device
+        remove <MAC> → remove a nconnected device
+        discoverable on → make discoverable by other devices
+        exit 
+
+ps: for bluetooth speaker, go to PulseAudio Volume Control and switch default output device
+
+
+
+
+-------------------------------------------------------------------
+What is swap?
+        Swap is extra memory space on your disk that Linux uses when RAM is almost full.
+
+Think of it like this:
+        RAM = desk you’re working on (fast)
+        Swap = a drawer under the desk (much slower)
+
+When the desk is full, Linux temporarily moves some things into the drawer so the system doesn’t crash.
+
+Swap vs RAM (important difference)
+| Feature          | RAM             | Swap            |
+| ---------------- | --------------- | --------------- |
+| Speed            | Very fast       | Very slow       |
+| Location         | Physical memory | Disk            |
+| Used for         | Active programs | Overflow memory |
+| Can replace RAM? | ❌ No           | ❌ No           |
+
+
+Expand swap file (safe & easy)
+1️⃣ Check current swap ==> swapon --show
+You should see something like: /swapfile  file  2G  ...
+
+
+2️⃣ Turn swap off (temporary & safe) ==> sudo swapoff /swapfile
+⚠️ Make sure no heavy apps are running.
+
+
+3️⃣ Create a larger swap file (8 GB) ==> sudo fallocate -l 8G /swapfile
+If fallocate fails, use: ==> sudo dd if=/dev/zero of=/swapfile bs=1M count=8192 status=progress
+
+
+4️⃣ Secure the swap file (important) ==> sudo chmod 600 /swapfile
+
+
+5️⃣ Format it as swap ==> sudo swapon /swapfile
+
+
+6️⃣ Turn swap back on ==> sudo swapon /swapfile
+
+
+7️⃣ Confirm it worked ==> free -h
+You should now see: Swap: 8.0G
+
+
+8️⃣ Ensure it persists after reboot (usually already set) => cat /etc/fstab | grep swap
+You should see: /swapfile none swap sw 0 0
+
+If it’s missing, add it: sudo nano /etc/fstab
+Add: /swapfile none swap sw 0 0
+Save → Ctrl+O, Enter → Ctrl+X
+
+
+__________________________________________________
+Optional but HIGHLY recommended tweaks
+Reduce aggressive swapping (better responsiveness):
+        sudo sysctl vm.swappiness=10
+
+To make it permanent:
+        sudo nano /etc/sysctl.conf
+
+Add: 
+        vm.swappiness=10
+
+(Default is 60 — too aggressive for HDD systems.)
+__________________________________________________
+
+Verify everything is healthy:
+        swapon --show
+        vmstat 1
+No errors = success ✅
+
+
+
+
+
+
