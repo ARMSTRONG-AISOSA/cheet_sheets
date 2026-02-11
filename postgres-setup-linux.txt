@@ -1,0 +1,252 @@
+# PostgreSQL + pgAdmin — Personal Setup Notes (Linux Mint / Ubuntu)
+
+These are my **personal notes** documenting how I set up PostgreSQL and pgAdmin on my local Linux machine. This is written for *future me* — practical, concise, and focused on what actually worked.
+
+---
+
+## 1. Install PostgreSQL
+
+```bash
+sudo apt update
+sudo apt install postgresql postgresql-contrib
+```
+
+Check service:
+
+```bash
+sudo systemctl status postgresql
+```
+
+Switch to postgres system user:
+
+```bash
+sudo -i -u postgres
+```
+
+Enter PostgreSQL shell:
+
+```bash
+psql
+```
+
+---
+
+## 2. Create a PostgreSQL Role (User)
+
+Inside `psql` as `postgres`:
+
+```sql
+CREATE ROLE armstrong WITH LOGIN CREATEDB PASSWORD 'STRONG_PASSWORD';
+```
+
+Verify:
+
+```sql
+\du
+```
+
+---
+
+## 3. Create a Database
+
+```sql
+CREATE DATABASE armstrong2_db OWNER armstrong;
+```
+
+List databases:
+
+```sql
+\l
+```
+
+Exit psql:
+
+```sql
+\q
+```
+
+---
+
+## 4. Fix Authentication (Important)
+
+Problem I hit:
+
+* `Peer authentication failed`
+* pgAdmin could not connect
+
+### Locate `pg_hba.conf`
+
+```bash
+sudo -u postgres psql -c "SHOW hba_file;"
+```
+
+Edit it:
+
+```bash
+sudo nano /path/to/pg_hba.conf
+```
+
+Ensure this rule exists **above peer rules**:
+
+```
+local   all   all   md5
+```
+
+Reload PostgreSQL:
+
+```bash
+sudo systemctl reload postgresql
+```
+
+---
+
+## 5. Always Test With psql First
+
+Before touching pgAdmin:
+
+```bash
+psql -h localhost -U armstrong -d armstrong2_db -W
+```
+
+If this fails → pgAdmin will fail too.
+
+---
+
+## 6. Install pgAdmin Repository
+
+```bash
+sudo apt install curl ca-certificates gnupg
+```
+
+```bash
+curl -fsS https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo gpg --dearmor -o /usr/share/keyrings/pgadmin-keyring.gpg
+```
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/pgadmin-keyring.gpg] https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/noble pgadmin4 main" | sudo tee /etc/apt/sources.list.d/pgadmin4.list
+```
+
+```bash
+sudo apt update
+```
+
+---
+
+## 7. Install pgAdmin Desktop
+
+```bash
+sudo apt install pgadmin4-desktop
+```
+
+Launch:
+
+* Applications menu → **pgAdmin 4**
+* Or:
+
+```bash
+/usr/pgadmin4/bin/pgadmin4
+```
+
+Optional (so `pgadmin4` works in terminal):
+
+```bash
+sudo ln -s /usr/pgadmin4/bin/pgadmin4 /usr/local/bin/pgadmin4
+```
+
+Note:
+
+* Desktop mode **does NOT require a login by default** on Linux
+* This is normal
+
+---
+
+## 8. Connect pgAdmin Desktop to PostgreSQL
+
+In pgAdmin:
+
+* Servers → Register → Server
+
+**General**
+
+* Name: Local PostgreSQL
+
+**Connection**
+
+* Host: `localhost`
+* Port: `5432`
+* Maintenance DB: `postgres`
+* Username: `armstrong`
+* Password: PostgreSQL password
+
+---
+
+## 9. Install pgAdmin Web Mode
+
+```bash
+sudo apt install pgadmin4-web
+```
+
+Setup:
+
+```bash
+sudo /usr/pgadmin4/bin/setup-web.sh
+```
+
+This creates:
+
+* pgAdmin **web login (email + password)**
+
+---
+
+## 10. Use pgAdmin Web
+
+Open browser:
+
+```
+http://localhost/pgadmin4
+```
+
+Login with pgAdmin web credentials.
+
+Register PostgreSQL server using the **same connection settings** as desktop.
+
+---
+
+## 11. Passwords (Very Important)
+
+| Password                 | What it is for                |
+| ------------------------ | ----------------------------- |
+| Linux user password      | `sudo`                        |
+| PostgreSQL role password | `psql`, pgAdmin DB connection |
+| pgAdmin web password     | pgAdmin web UI login          |
+
+These are **not the same**.
+
+---
+
+## 12. Commands I Keep Forgetting
+
+```bash
+psql -h localhost -U armstrong -d postgres -W
+\du          -- list roles
+\l           -- list databases
+DROP DATABASE db_name;
+DROP ROLE role_name;
+```
+
+---
+
+## 13. Key Lessons Learned
+
+* Always test with `psql` first
+* pgAdmin Desktop ≠ pgAdmin Web
+* Peer auth breaks GUI tools
+* Linux pgAdmin desktop may open without password (normal)
+* Web mode is the only place with real pgAdmin logins
+
+---
+
+## End
+
+These notes are my reference for rebuilding a clean PostgreSQL + pgAdmin setup in the future.
+
