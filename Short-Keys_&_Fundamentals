@@ -95,8 +95,9 @@ Delete Folder(s):
 
 
 Directory with Contents:
-        rm -r folder_name            # Recursive delete (files + subfolders)
-        rm -rf folder_name           # Force recursive delete (no prompts)
+        rm -r folder_name               # Recursive delete (files + subfolders)
+        rm -rf folder_name              # Force recursive delete (no prompts)
+        rm -rf folder1 folder2 folder3  # Delete Multiple Folders
 ⚠️ DANGEROUS: rm -rf / or rm -rf * can destroy your system!
 
 
@@ -286,6 +287,167 @@ Verify everything is healthy:
         swapon --show
         vmstat 1
 No errors = success ✅
+
+
+-------------------------------------------------------------------
+Compress Files with PW using terminal
+zip -re archive_name.zip folder_to_compress/
+
+Note: -r stands for "recursive" (which tells it to include all files and nested folders inside), and -e tells it to "encrypt".
+
+Do this in the place where the folder existdsb via terminal.
+
+
+
+-------------------------------------------------------------------
+#Create and  Delete Folder
+1. Create folder via terminal
+Bash
+    ```mkdir new-folder-name
+
+2. Multiple folder
+Bash
+    ```mkdir photos videos documents
+
+3. Create Nested Folders (The Parent Flag
+Bash
+    ```mkdir -p projects/blog/images
+
+4. Delete folder: Reference from previous sections(Use search)
+
+
+
+-------------------------------------------------------------------
+#Create and  Delete Files
+#Create
+1. Create a Blank File (Quickest)
+ps:If the file already exists, touch simply updates its "last modified" timestamp without changing its contents.
+Bash
+    ```touch index.html
+
+2. Create Multiple Files at Once
+Bash
+    ```touch styles.css script.js README.md
+
+3. Create a File and Write Text Directly
+Bash
+    ```touch styles.css script.js README.md
+> creates the file (or overwrites it if it already exists) and inserts the text.
+>> (double arrow) will append the text to the end of the file if it already exists, instead of erasing it.
+
+4. Create and Edit a File (Terminal Text Editors)
+Bash
+    ```nano config.json
+To save and exit Nano: Press Ctrl + O (WriteOut), hit Enter, then press Ctrl + X to exit.
+
+
+
+#Delete
+1. Delete a Single File
+Bash
+    ```rm log.txt
+
+2. Delete Multiple Specific Files
+Bash
+    rm index.html styles.css script.js
+
+3. Delete Files Using Wildcards (*)
+
+    Bash: Delete all files in the current folder
+        ```rm *
+
+    Bash: Delete all files of a specific type (e.g., all PNG images)
+        ```rm *.png
+
+    Bash: Delete any file that starts with "temp"
+        ```rm temp*
+
+    Bash: you want everything gone, -f overrides the (safety/protection)prompts and deletes silently
+        ```rm -f protected-file.txt
+
+
+
+-------------------------------------------------------------------
+#Move Files and Folders
+1. Moving a File (Item) into a Folder
+Bash
+    ```mv script.js src/
+
+2. Moving a Folder into Another Folder
+Bash
+    ```mv components/ src/
+
+3. Moving Items Up a Directory (The .. Trick)
+Bash
+    ```mv style.css ..
+
+4. Moving/Pulling Items/files out of a subfolder into your current space
+If you are at your project root and want to pull a file out of a subfolder into your current space, use a dot . (which stands for "here"):
+Bash
+    ```mv src/index.js .
+
+5. Move Multiple Items At Once: You can list multiple files or folders inline. Linux will treat the very last item in the command as the destination folder:
+Bash
+    ```mv index.js styles.css utils/ src/
+
+6. Move all Items At Once:
+-v: info on which files are being coppiedls
+-i: ask for permission before any overwrite
+Bash
+    ```mv * utils/ src/
+
+
+
+
+
+-------------------------------------------------------------------
+#Rename Files and Folders
+1. Renaming a File
+To rename a file, type mv, followed by the current filename, and then the new filename:
+Bash
+    ```mv index.js app.js
+
+2. Renaming a Folder
+Renaming a directory works exactly the same way. You do not need any special flags (like -r):
+Bash
+    ```mv old-components new-components
+    ```mv "old file name.txt" "new file name.txt"
+
+
+
+
+
+
+-------------------------------------------------------------------
+#Built-in Text editor 
+Bash
+    ```nano <failename>
+
+
+
+
+-------------------------------------------------------------------
+#copy files and folders
+1. Copy a file into a new file
+Bash
+    ```cp <filename> <new-filename>
+
+2. Copy a file into a folder
+Bash
+    ```cp <filename> path/<new-filename>
+
+3. Make a copy of the folder
+Bash
+    ```cp <folder> <new-folder>
+
+3. Make a copy of the folder with:
+-r: recursively
+-v: info on which files are being coppiedls
+-i: ask for permission before any overwrite
+Bash
+    ```cp -rvi backup-folder/ backup-new
+
+
 
 
 
