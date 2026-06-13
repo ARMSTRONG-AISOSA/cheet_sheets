@@ -130,8 +130,9 @@ Send to Trash (GUI-like):
 
 
 -------------------------------------------------------------------
-Search(grep):
-        grep "word" filename
+Search(grep): grep is the search engine for the text inside your files.
+        grep stands for Global Regular Expression Print.
+        syntax: grep [options] "what to search for" filename
         ex. grep "error" log.txt
 
    grep is a Linux command used to search for text patterns inside files or command output.
@@ -149,7 +150,12 @@ Search inside a folder:
         armstrong@armstrong-Latitude-E6540:~/Documents/Visual_Studio$ grep -r "git" "cheet_sheets" 
         armstrong@armstrong-Latitude-E6540:~/Documents/Visual_Studio$ grep -r "git" . 
 
+Case-Insensitive Search (-i)
+        grep -i "error" storage-space/log.txt
 
+Force an exact word match (-w)
+-w forces an exact word match (matches "app", skips "appointment")
+        grep -w "app" server.js
 
     You can “pipe” output into grep using
 
@@ -159,6 +165,8 @@ Search inside a folder:
 | `-r`           | Search recursively (folders)            |
 | `-n`           | Show line numbers                       |
 | `-v`           | Show lines **not** matching             |
+| `-c`           | Count the Matches                       |
+| `-w`           | force an exact word match               |
 | `--color=auto` | Highlight matches                       |
 
         ex. ps aux | grep --color=auto brave
@@ -446,6 +454,244 @@ Bash
 -i: ask for permission before any overwrite
 Bash
     ```cp -rvi backup-folder/ backup-new
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------
+#Find
+find acts like a search engine for your entire storage system. It recursively digs through folders to locate (in real-time) files and directories based on names, sizes, file types, modification dates, or permissions.
+
+
+Syntax for Find
+Bash
+    ```find [where to search] [criteria] [what to look for]
+
+    ** Where to search: A folder path (like ., src/, /home, or /). If you leave this blank, it defaults to your current directory (.).
+    ** Criteria: The filter you want to use (e.g., -name, -type, -size).
+    ** What to look for: The specific file name or property you want to match.
+
+
+
+
+1. Searching by Name (-name)
+(a). Find an exact file in your current folder and its subfolders:
+Bash
+    ```find . -name "index.js"
+
+(b). Case-Insensitive Search (-iname): If you aren't sure if the file is capitalized or lowercase, use -iname:
+Bash
+    ```find . -iname "readme.md"
+# This will find README.md, readme.md, ReadMe.MD, etc.
+
+(c). Using Wildcards (*): To find all files of a specific extension, always wrap the wildcard pattern in quotes so the terminal doesn't execute it prematurely:
+Bash
+    ```find src/ -name "*.css"
+# This will find README.md, readme.md, readme.txt, ReadMe.txt, ReadMe.MD, etc.
+Bash
+    ```find . -iname "readme.*"
+# This will find README.md, readme.md, readme.txt, ReadMe.txt, ReadMe.MD, etc.
+
+
+
+2. Filtering by Type (-type)
+Sometimes you only want to search for folders, or strictly look for files. You can restrict your search using the -type flag:
+
+(a). Find only files (f):
+Bash
+    ```find . -type f -name "config"
+
+(b). Find only directories/folders (d):
+Bash
+    ```find . -type d -name "git*"
+
+
+
+3. Searching by File Size (-size)
+If you need to track down files based off size, find handles that easily using + (greater than) or - (less than) modifiers.
+
+(a). Find files larger than 100 Megabytes:
+Bash
+    ```find . -type f -size +100M
+
+(b). Find files smaller than 10 Kilobytes:
+Bash
+    ```find . -type f -size -10k
+(Note: Use k for kilobytes, M for megabytes, and G for gigabytes).
+
+
+4. Searching by time (-mtime)
+If you need to track down files based off time created/last modified
+(a). Finds files modified within the last 2 days:
+Bash
+    ```find . -mtime -2
+
+
+5. Searching by Others: 
+        Empty files/folders (-empty),
+        system wide search (/),
+        Limit the Search Depth (-maxdepth)
+(a). Finds any completely empty files or folders:
+Bash
+    ```find . -empty
+
+(b). Searches your entire computer (/) for the Nginx config file:
+Bash
+    ```find / -name "nginx.conf"
+
+(c). Tells find strictly to look at/all the files in your current directory level and not dig into any subfolders by using the -maxdepth 1 :
+Bash
+    ``` find . -maxdepth 1 -iname "*"
+
+
+
+
+Advanced Executions: Combining & Executing
+Combining Search Options
+You can chain criteria together to create highly specific searches. 
+Example: find all folders named "node_modules":
+Bash
+    ```find . -type d -name "node_modules"
+
+Example: find all folders with "node" in it's name and ignore letter cases:
+Bash
+    ```find . -type d -iname "*node*"
+
+Example: find all files with "node" in it's name and ignore letter cases:
+Bash
+    ```find . -type f -iname "*node*"
+
+Example: find all created or modified file in the past 24hrs with "brave" in the their name in this folder
+Bash
+    ```find . -type f -mtime -1 | grep brave
+
+
+The Ultimate Developer Trick(s): -exec
+Find can also instantly perform an action on every file it locates using the -exec flag.
+For example, if you want to find all .log files in a project directory and delete them all at once:
+Bash
+    ```find . -type f -name "*.log" -exec rm -rf {} \;
+   ** {} acts as a placeholder for each file that find encounters.
+   ** \; tells the terminal that the execution command is finished.
+
+Example: find all files with "file" in the their name in this folder and move it to the <another-folder>
+Bash
+    ```find . -type f -iname "*file*" -exec mv -iv {} storage-space/ \;
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------
+#Locate
+locate acts like a highly indexed search engine database.
+Weakness: newly created files might not be indexed yet and when a file/folder is newly deleted, it doesn't reflect in the index immmediately.
+
+This happens because the system database usually only updates once a day via an automated background task (cron job).
+
+PS: Search strictly by filename/path
+
+Solution: How to force an index update
+Bash
+    ```sudo updatedb
+
+
+1. Basic Usage
+To find a file anywhere on your system, just type locate followed by part of the filename:
+Bash
+    ```locate index.js
+This will instantly spit out every absolute path on your computer containing index.js (e.g., /home/armstrong/Desktop/Copy/storage-space/index.js).
+
+
+2. Case-Insensitive Search (-i)
+Just like find -iname, you can make locate ignore uppercase and lowercase distinctions by adding the -i flag:
+Bash
+    ```locate -i readme.md
+
+3. Limiting Results (-n)
+Because locate searches your entire system, typing a common name like file might flood your terminal with thousands of lines of results. You can cap the output using the -n (number) flag:
+Bash
+    ```locate -n 5 file1.txt
+This will only return the first 5 matches it finds.
+
+4. Count the Matches (-c)
+If you don't want to see the file paths and just want to know how many files exist that match your search, use the -c (count) flag:
+Bash
+    ```locate -c "*.png"
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------
+#File and Folder Compression -- tar
+tar => Tape Archive
+A tool for bundling multiple files and folders into a single archive file (often called a "tarball"), and for extracting them later
+
+1. Compress a folder (Create an Archive)
+Bash
+    ```tar -czvf <archive-name.tar.gz> <folder_to_compress>/
+
+2. Decompress an archive (Extract everything)
+Bash
+    ```tar -xzvf <archive-name.tar.gz>
+
+Breaking Down the Flags
+    ** -c (Create): Tells tar to pack files together and make a brand-new archive.
+    ** -x (eXtract): Tells tar to unwrap an existing archive.
+    ** -z (Gzip): Compresses the archive using Gzip to make the file size much smaller. Without this flag, tar just clumps the files together into a large, uncompressed block.
+    ** -v (Verbose): Optional but helpful. It lists every file in the terminal as it gets packed or unpacked so you can watch the progress live.
+    ** -f (File): Tells tar that the very next word you type is going to be the filename of the archive. This flag must always go last right before the archive name.
+
+
+Common Real-World Scenarios
+1. Checking what is inside an archive without extracting it
+Want to peek inside to see its contents before dumping hundreds of files into your working directory, use the -t (list) flag:
+Bash
+    ```tar -tzf archive-name.tar.gz
+
+2. Extracting files to a specific directory
+Unpack files into a specific folder, add the capital -C flag followed by the target path
+Bash
+    ```tar -xzvf archive-name.tar.gz -C /home/armstrong/Desktop/Copy/backup-new/
+
+3. Excluding specific folders & files (like node_modules & .git)
+Method 1: Repeat the --exclude Flag
+Bash
+    ```tar -xzvf archive-name.tar.gz -C /home/armstrong/Desktop/Copy/backup-new/
+    ```tar --exclude='node_modules' --exclude='.git' --exclude='.env' -czvf project.tar.gz my-web-app/
+
+Method 2: Use an Exclude File (Best for large projects)
+1. Create your exclusion list file
+Create a file named exclude-list.txt and list the items you want to skip, one per line:
+Plaintext
+    ```
+        node_modules
+        .git
+        .env
+        *.log
+        dist
+2. Run the tar command with -X
+Bash
+    ```tar -czvf project.tar.gz -X exclude-list.txt my-web-app/
+tar will read exclude-list.txt first, map out everything it needs to skip, and then bundle up the rest of your app.
+
+
 
 
 
