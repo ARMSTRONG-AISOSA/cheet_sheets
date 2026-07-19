@@ -150,7 +150,7 @@ Search inside a folder:
         armstrong@armstrong-Latitude-E6540:~/Documents/Visual_Studio$ grep -r "git" "cheet_sheets" 
         armstrong@armstrong-Latitude-E6540:~/Documents/Visual_Studio$ grep -r "git" . 
 
-Case-Insensitive Search (-i)
+Case-Insensitive Search (-i) :--ignore-case LOCAL
         grep -i "error" storage-space/log.txt
 
 Force an exact word match (-w)
@@ -171,25 +171,6 @@ Force an exact word match (-w)
 
         ex. ps aux | grep --color=auto brave
 
-
-
--------------------------------------------------------------------
-Bluetooth:
-        bluetoothctl → start program
-        power off
-        power on
-        agent on
-        default-agent
-        scan on → find devices
-        scan off → stop scanning
-        pair <MAC> → pair to a device
-        trust <MAC> → trust a paired device
-        connect <MAC> → connect to a paired and trusted device
-        remove <MAC> → remove a nconnected device
-        discoverable on → make discoverable by other devices
-        exit 
-
-ps: for bluetooth speaker, go to PulseAudio Volume Control and switch default output device
 
 
 
@@ -464,7 +445,9 @@ Bash
 
 -------------------------------------------------------------------
 #Find
-find acts like a search engine for your entire storage system. It recursively digs through folders to locate (in real-time) files and directories based on names, sizes, file types, modification dates, or permissions.
+This initializes the search engine tool. Unlike the locate command (which reads from an old, cached index file), find searches your hard drive in real-time, meaning it is always 100% accurate.
+ 
+It recursively digs through folders to locate (in real-time) files and directories based on names, sizes, file types, modification dates, or permissions.
 
 
 Syntax for Find
@@ -586,7 +569,17 @@ Bash
 
 
 
+CASE STUDY
+Bash
+    ```find  ~  -type f  -iname "*localsend*"  2>/dev/null
 
+1. The Tool (find): This initializes the search engine tool. 
+2. The Location (~): This tells the command where to start looking(Home Directory).
+3. The Constraint (-type f): This filters the results by object type(f => file).
+4. The Target (-iname "*localsend*"): This defines what you are looking for in a case-insensitive manner.The asterisks (*) are called wildcards. They act as placeholders meaning "anything can go here."
+5. The Noise Filter (2>/dev/null)This cleans up your terminal screen.
+    In Linux, 2 represents Standard Error (the channel where permission denied errors or broken path warnings are sent).
+    The symbol > means "redirect to," and /dev/null is a virtual black hole where data is thrown away.By adding this, you told the system: "If you hit a hidden folder that I don't have permission to read, silently throw that error away instead of spamming my screen with text."
 
 
 
@@ -698,5 +691,88 @@ tar will read exclude-list.txt first, map out everything it needs to skip, and t
 
 
 
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------
+###APP Documentation
+------------------------------------------------------------------------------------------------
+Bluetooth:
+        bluetoothctl → start program
+        power off
+        power on
+        agent on
+        default-agent
+        scan on → find devices
+        scan off → stop scanning
+        pair <MAC> → pair to a device
+        trust <MAC> → trust a paired device
+        connect <MAC> → connect to a paired and trusted device
+        remove <MAC> → remove a nconnected device
+        discoverable on → make discoverable by other devices
+        exit 
+The executable binary you need to trigger is right here:
+/home/armstrong/PostmanAgent/Postman Agent/app/postman-agent
+
+Because there is a space in the folder name (Postman Agent), we just need to use quotes when jumping into the directory. Run these two commands in your terminal to get it working right now:
+
+Bash
+cd "/home/armstrong/PostmanAgent/Postman Agent/app"
+./postman-agent
+Once you run that, keep the terminal open, refresh your web browser, make sure the bottom right toggle is set to Desktop Agent, and your localhost requests will work immediately.
+ps: for bluetooth speaker, go to PulseAudio Volume Control and switch default output device
+
+
+-------------------------------------------------------------------
+KDE Connect: Quick Setup & Security Documentation
+Step 1: Install KDE Connect on Your PC
+```Bash
+        sudo apt update && sudo apt install kdeconnect -y
+
+
+Step 2: Install the Android App
+Open the Google Play Store to install it. Connect your phone to the same Wi-Fi router as your PC.
+
+Step 3: Open the Firewall (Simple Rule)
+To allow your phone and PC to discover each other, temporarily open the required port range in UFW:
+```Bash
+        sudo ufw allow 1714:1764/tcp
+        sudo ufw allow 1714:1764/udp
+        sudo ufw reload
+
+Step 4: Pair the Devices
+
+Step 5: Close the Ports (Post-Transfer Cleanup)
+Once you are finished transferring your files, run these commands to close the network ports.
+```Bash
+        sudo ufw delete allow 1714:1764/tcp
+        sudo ufw delete allow 1714:1764/udp
+        sudo ufw reload
+
+Verify Security Status
+```Bash
+        sudo ufw status verbose
+
+
+
+
+-------------------------------------------------------------------
+Postman Desktop Agent: Startup Documentation
+
+The executable binary you need to trigger is right here:
+PATH: /home/armstrong/PostmanAgent/Postman Agent/app/postman-agent
+
+Because there is a space in the folder name (Postman Agent), we just need to use quotes when jumping into the directory. Run these two commands in your terminal to get it working right now:
+
+```Bash
+        cd "/home/armstrong/PostmanAgent/Postman Agent/app"
+        ./postman-agent
+Once you run that, keep the terminal open, refresh your web browser, make sure the bottom right toggle is set to Desktop Agent, and your localhost requests will work immediately.
 
 
