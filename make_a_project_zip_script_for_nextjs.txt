@@ -1,0 +1,101 @@
+Nextjs code Bundler[zip] (Linux Mint Workflow)
+
+This documentation outlines the automated pipeline for stripping project dependencies from nextjs, 
+packaging valid development context into a size-compliant ZIP archive, and surfacing the file for manual injection into Ai model (Google Gemini).
+
+---
+## 🏗️ Architecture & Constraints
+- **Host OS**: Linux Mint (Ubuntu/Debian downstream)
+- **Target Projects**: Next.js (v14/v15) with shadcn/ui primitives
+- **Target Model**: Google Gemini Web Application (Browser Sandbox)
+- **Size Limit Constraints**: `< 100 MB` per file payload
+- **Exclusion Profiles**: Automated removal of heavy node modules, build files, and hidden tracking environments.
+
+---
+## 🛠️ Installation & Setup (One-Time Execution)
+
+### 1. System Dependencies
+Ensure the native POSIX compilation and archiving tool handles zip pipelines:
+```bash
+sudo apt update && sudo apt install zip -y
+```
+
+### 2. Deployment of the Automation Blueprint
+Create a global runtime script within your user profile directory:
+```bash
+nano ~/zip_code.sh
+```
+
+Paste the tracking matrix into the file:
+```bash
+#!/bin/bash
+
+# Target the execution path where the command is instantiated
+PROJECT_DIR=\$(pwd)
+ZIP_NAME="nextjs-shadcn-context.zip"
+OUTPUT_PATH="HOME/Desktop/ZIP_NAME"
+
+echo "🧹 Stripping artifacts and structuring project architecture: \$PROJECT_DIR"
+
+# Validate codebase roots to ensure terminal context safety
+if [ ! -f "package.json" ]; then
+    echo "⚠️ Runtime Interrupt: package.json missing. Cancelled."
+    exit 1
+fi
+
+# Purge previous stale bundle iterations
+rm -f "\$OUTPUT_PATH"
+
+# Package active code trees while explicitly stripping heavy allocations
+zip -r "\$OUTPUT_PATH" . \
+  -x "node_modules/*" \
+  -x ".next/*" \
+  -x ".git/*" \
+  -x "dist/*" \
+  -x "build/*" \
+  -x ".env*" \
+  -x "*.log" \
+  -x ".vercel/*"
+
+echo "✅ Deployment Payload generated on user desktop: \$ZIP_NAME"
+
+# Surface the file using Linux Mint's native Nemo File System layout
+nemo "\$HOME/Desktop" &
+```
+
+Set execution bit flags to allow the binary runtime to run:
+```bash
+chmod +x ~/zip_code.sh
+```
+
+### 3. Bash Pipeline Registration (Shortcut)
+Map the initialization script to an internal workspace alias:
+```bash
+nano ~/.bashrc
+```
+
+Append the tracking record to the lowest line block:
+```bash
+alias bundlenextcode="~/zip_code.sh"
+```
+
+Force-reload your environment engine configurations immediately:
+```bash
+source ~/.bashrc
+```
+
+---
+
+## 🚀 Iterative Daily Pipeline
+
+Follow these procedures during debugging or feature-scaling loops:
+
+1. **Invoke the Bundler**: Inside the VS Code integrated terminal (`Ctrl + ~`), type:
+   ```bash
+   bundle
+   ```
+2. **System Action**: The system isolates your code, creates a clean metadata package, and launches the **Nemo** window focused on your desktop.
+3. **Context Injection**: Drag-and-drop the generated `nextjs-shadcn-context.zip` directly into the web interface.
+4. **Context Prime Prompt**: Pair your file upload with this operational frame for optimized AI code tracking:
+
+

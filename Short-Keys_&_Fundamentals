@@ -776,3 +776,95 @@ Because there is a space in the folder name (Postman Agent), we just need to use
 Once you run that, keep the terminal open, refresh your web browser, make sure the bottom right toggle is set to Desktop Agent, and your localhost requests will work immediately.
 
 
+-------------------------------------------------------------------
+How to set up Nextjs on Low Specs PC on Linux
+Refrence Nextjs_Low_spec.Docx in cheet_sheet folder
+
+
+
+-------------------------------------------------------------------
+npm Registry Mirrors(Ubuntu)
+
+The primary difference between registry comes down to geographical location, network routing, and server infrastructure: Check Bottom of section for more;
+
+That ETIMEDOUT error simply means npm tried to reach the registry at registry.npmjs.org, but the connection timed out before it could download the package.
+
+---
+Step 1: Fix or Switch npm Registry Mirrors
+Sometimes the main npm registry or its CDN routes temporarily fail or drop connections. You can switch to the Cloudflare mirror or reset npm's registry settings:
+Bash```
+    # Set npm to use Cloudflare's fast npm mirror
+    npm config set registry https://registry.npmmirror.com/
+
+Bash```
+# To switch back to default official registry later:
+npm config set registry https://registry.npmjs.org/
+
+
+---
+Step 2: Clear npm Proxy (and Timeout Settings)
+If you previously set up a proxy or npm is hanging on old configuration cache, clear it and increase the network fetch timeout:
+
+Bash```
+    # Clear any stale proxy configurations
+    npm config delete proxy
+    npm config delete https-proxy
+
+| # Increase fetch timeout limit to give slow network connections more time (in milliseconds) |
+| npm config set fetch-retry-mintimeout 20000                                                 |
+| npm config set fetch-retry-maxtimeout 120000                                                |
+
+---
+Step 3: Clear the npm Cache and DNS
+Flush your local npm cache and system DNS cache in case an old IP route is cached:
+
+Bash```
+    # Force clear npm cache
+    npm cache clean --force
+
+    # System DNS flush for Ubuntu / Mint
+    sudo resolvectl flush-caches
+
+    #to verify it worked: check the cache statistics to confirm it flushed
+    resolvectl statistics
+
+
+By default, npm keeps quiet while installing packages, showing only a minimal spinner or progress bar. When you have network issues (like a timeout), it feels like it's stuck hanging forever.
+
+Here are the best flags to add to npm install convex so you can watch in real time exactly what files, network requests, and scripts are running:
+
+Bash```
+        npm install "package-name" --loglevel http --foreground-scripts
+
+This combo is for Heavy Network Troubleshooting; Tells you about what is happening with your connection (when acting up) and gives you maximum transparency into network requests and background scripts.
+
+
+
+The Default npm Registry (registry.npmjs.org) vs. The Mirror Registry (registry.npmmirror.com)
+
+1. The Default npm Registry (registry.npmjs.org)
+   * Host / Location: Hosted by GitHub (Microsoft) on global servers, primarily concentrated in North America and Europe.
+
+   * How it works: It is the official, primary source for all Node.js packages worldwide. Every single package published by developers lands here first.
+
+   * Why it timed out for you: Depending on your local internet service provider (ISP) or international network routing, connection drops, high latency, or packet loss can cause npm's default fetch timer to expire (ETIMEDOUT) before the connection establishes.
+
+
+2. The Mirror Registry (registry.npmmirror.com)
+   * Host / Location: Maintained by Alibaba Cloud (a major global cloud CDN provider).
+
+   * How it works: It is a synchronized read-only replica (mirror) of the official npm registry. It continuously mirrors every package from npmjs.org every few minutes.
+
+   * Why it succeeded: Alibaba’s CDN routes traffic differently across international undersea cables. For your local network connection, its servers responded faster and maintained a stable socket without dropping the request mid-way.
+
+
+Leaving npmmirror.com active as your registry will ensure future npm install commands don't hit the ETIMEDOUT wall.
+
+If you ever need to publish your own npm package to the public registry in the future, you can easily switch back with:
+
+
+
+
+-------------------------------------------------------------------
+How to Write/Create a script to Zip NextJs projects(relevant files) in Ubuntu
+Check cheet_sheet folder
