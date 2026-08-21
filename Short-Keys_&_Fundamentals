@@ -11,6 +11,7 @@ F9 ==> Open/Close Side Bar
 F3 ==> Toggle Extra Pane
 Ctrl + Alt + Shift + R ==> Screen Rec
 Crtl + S ==> Save Doc
+ctrl + I ==> Show (Selected) Folder Properties
 ctrl + H ==> Show Hidden Files
 Ctrl + R ==> Refresh View
 Ctrl + L ==> Toggle Locaton Entry
@@ -868,3 +869,43 @@ If you ever need to publish your own npm package to the public registry in the f
 -------------------------------------------------------------------
 How to Write/Create a script to Zip NextJs projects(relevant files) in Ubuntu
 Check cheet_sheet folder
+
+
+-------------------------------------------------------------------
+How to virtually expand and manage memory in linux. Check @ cheet_sheets zram_and_early'oom_linux_memory_optimization.md
+
+
+
+-------------------------------------------------------------------
+To view a tree-like map of your folders and files directly in your terminal, the best tool to use is the tree utility. 
+
+---Set-up
+Option 1: Using the tree Command (Recommended) install tree quickly using apt.
+
+1. Install treeRun this command in your terminal:
+```bash
+        sudo apt update && sudo apt install tree -y
+
+2. Run treeNavigate to any project folder and type:
+```bash
+        tree
+📌 Example Output (for a Rust project)text.
+        ├── Cargo.toml
+        └── src
+            └── main.rs
+        1 directory, 2 files
+
+*** Useful Flags for treeLimit Depth: limit the view of nexted folders to 2 levels deep:
+```bash
+        tree -L 2
+
+***Show Hidden Files: Ex .gitignore or .git folders):
+```bash
+        tree -a
+
+***Sow directories only and ignore files:
+```bash
+        tree -d
+
+
+-------------------------------------------------------------------
