@@ -903,9 +903,225 @@ Option 1: Using the tree Command (Recommended) install tree quickly using apt.
 ```bash
         tree -a
 
-***Sow directories only and ignore files:
+***Show directories only and ignore files:
 ```bash
         tree -d
 
 
 -------------------------------------------------------------------
+Crtl + H => Find and replace text on linux .txt editor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------
+HP - Probook
+------------------------------------------------------------------------------------------------
+
+Find out Info about your PC and Linux Mint OS
+```bash
+        hostnamectl
+HP-ProBook-640-G1:~$ hostnamectl
+ Static hostname: armstrong-HP-ProBook-640-G1
+       Icon name: computer-laptop
+         Chassis: laptop 💻
+      Machine ID: dc27337b53134fd6b67715bbc91386ee
+         Boot ID: 4820119836084d0fb6f89f661311f32b
+Operating System: Linux Mint 22.3                 
+          Kernel: Linux 7.0.0-30-generic
+    Architecture: x86-64
+ Hardware Vendor: Hewlett-Packard
+  Hardware Model: HP ProBook 640 G1
+Firmware Version: L78 Ver. 01.31
+   Firmware Date: Wed 2014-12-24
+    Firmware Age: 11y 8month 2d    
+
+
+Always go to Software Sources(GUI) and change mirrors to fastest mirrors
+
+----------------------------------------------
+How to Write create Alias
+
+1. Open your terminal config file:
+```bash
+        nano ~/.bashrc
+
+2. Scroll to the very bottom of the file and paste this line:
+```bash
+        alias telegram='flatpak run org.telegram.desktop'
+
+3. Press Ctrl + O then Enter to save, and Ctrl + X to exit.
+
+4. Reload your terminal settings:
+```bash
+        source ~/.bashrc
+
+5. Reload your terminal settings:
+```bash
+        telegram
+
+----------------------------------------------
+Flatpak instalation => flatpak install flathub com.slack.Slack
+
+Here is the exact breakdown of what every single word in that command tells your Linux Mint system to do:
+
+flatpak install flathub com.slack.Slack
+  │       │       │          │
+  │       │       │          └─► The unique App ID for Slack
+  │       │       └────────────► The source app store (repository)
+  │       └────────────────────► The action command
+  └────────────────────────────► The packaging system tool
+
+## 1. flatpak (The Tool)
+This calls the Flatpak program itself. Flatpak is a modern software deployment and package management system built into Linux Mint. It runs apps in a secure, isolated "sandbox" so they don't mess with your core system files.
+## 2. install (The Action)
+This is the specific sub-command telling Flatpak what to do. You are instructing it to download and set up a new application on your drive.
+## 3. flathub (The Source)
+This is the repository (or app store) where Flatpak will look. Flathub is the largest central repository for Linux Flatpak apps, hosting thousands of official applications, including Slack.
+## 4. com.slack.Slack (The App Identifier)
+This is the unique Application ID for Slack. Linux apps use a reverse-domain naming convention (similar to Android app packages) to make sure no two apps share the same name.
+
+* com = Commercial entity
+* slack = The company name
+* Slack = The specific product name
+
+------------------------------
+When you press Enter, Flatpak connects to Flathub, grabs the unique Slack package, downloads any shared background files it needs to run, and safely installs it to your Mint menu.
+
+
+----------------------------------------------
+Launch application
+
+#Brave Browser
+brave-browser
+
+#Vs-Code
+code .
+
+#Docker
+Get more documentation and training
+
+#Vlc
+vlc
+vlc ~/Downloads/video.mp4
+
+
+#Node
+node
+
+#Gimp
+gimp &
+
+#Discord
+flatpak run com.discordapp.Discord &
+Alias => discord
+
+#Slack
+flatpak run com.slack.Slack
+Alias => slack
+
+#Telegram
+flatpak run org.telegram.desktop
+Alias => telegram
+
+#OBS Studio
+flatpak run com.obsproject.Studio
+Alias => obs
+
+#OnlyOffice
+flatpak run org.onlyoffice.desktopeditors
+Alias => onlyoffice
+
+#Baobab
+baobab
+A graphical application (for the GNOME desktop environment) that helps you visualize and manage your disk space.
+
+
+#Calibre
+calibre
+
+#Claude
+claude
+
+#Htop
+htop
+an advanced, interactive, color-coded Task Manager for your terminal. It shows you a live, scrolling view of every background process running on your HP ProBook, how much RAM you are using, and how hard your CPU cores are working.
+
+
+#gimageReader
+gimagereader-gtk
+A graphical front-end application used for OCR (Optical Character Recognition).Its primary purpose is to extract text from images or scanned PDF documents and convert it into fully editable, copyable plaintext. 
+Core Features and Functions
+
+
+#KDenLive
+flatpak run org.kde.kdenlive
+Alias => kdenlive
+
+
+#Wireshark
+wireshark
+
+
+#ppsspp
+flatpak run org.ppsspp.PPSSPP
+Alias => ppsspp
+
+
+
+
+
+
+
+----------------------------------------------
+tree is a highly useful command-line utility that recursively displays the contents of directories in a tree-like depth diagram. 
+It is perfect for mapping out codebases, understanding project layouts, or organizing complex folders on your HP ProBook.
+
+Install via APT
+```bash
+        sudo apt update && sudo apt install -y tree
+
+------------------------------
+
+## 1. Basic Tree Map
+```bash
+        tree
+
+## 2. Limit the Depth 
+```bash
+        tree -L 2
+
+## 3. List Directories Only
+```bash
+        tree -d
+
+## 4. Save(export) the Map to a Document
+You can instantly export your folder architecture to a clean layout file to share with others or document a coding project:
+```bash
+        tree -L 3 >~/Desktop/folder_structure.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

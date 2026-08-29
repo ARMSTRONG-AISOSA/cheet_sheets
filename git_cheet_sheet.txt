@@ -68,6 +68,42 @@ git pull origin <branch>            # Pull from specific branch
 git pull origin main	Pull updates from remote main branch
 git remote set-url origin <url> change remote url in one go
 
+🌍 Git Push to Multiple Remote Repository
+Command	Description
+***Option 1: (Recommended)
+The Multi-URL Method, This approach lets you push to all remote repositories simultaneously using just one command: "git push origin main".
+Add your primary repository (if you haven't already):
+```bash
+        git remote add origin https://github.com
+
+Add the second repository URL to the same origin name:
+```bash
+        git remote set-url --add --push origin https://github.com
+
+Add a third repository URL if needed:```bash
+        it remote set-url --add --push origin https://github.com
+Now, when you run git push origin main, Git will upload your code to all three destinations at once.
+
+***Option 2: 
+The Unique Nickname MethodThis approach keeps the repositories completely separate. 
+You choose exactly when and where to send your code by using different nicknames.
+Link each repository with a unique name:
+```bash
+        git remote add github https://github.com
+```bash
+        git remote add gitlab https://gitlab.com
+Push to them individually by specifying the nickname you want to target:bashgit push -u github main
+```bash
+        git push -u gitlab main
+
+How to Check Your SetupTo verify that your entry was successful, run this command to view your active connections:
+```bash
+        git remote -v
+
+Important: When you clone that repository on a new machine in the future, Git will not remember the custom name github. 
+Instead, Git will automatically reset the nickname of that URL back to the default name: origin
+
+
 🧹 Clean Up
 Command	Description
 git clean -n	Preview untracked files to be deleted
